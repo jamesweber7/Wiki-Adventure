@@ -31,6 +31,7 @@ function setup() {
         adventure = data;
         if (window.location.href == adventure.history[adventure.history.length-1]) {
             createJo();
+            addEventListeners();
             if (adventure.end == CURRENT_PAGE) {
                 confetti();
                 addEndGameElement();
@@ -38,6 +39,30 @@ function setup() {
                 makeDoors();
                 addUIElements();
             }
+        }
+    });
+}
+
+function addEventListeners() {
+    document.addEventListener('keydown', function (e) {
+        if ([DOWN_KEY, UP_KEY, LEFT_KEY, RIGHT_KEY, ENTER_KEY].includes(e.code) || (e.code == "KeyF" && e.ctrlKey))
+            e.preventDefault();
+        switch (e.code) {
+            case DOWN_KEY : 
+                !movementKeys.includes(DOWN_KEY) && downPushed();
+                break;
+            case UP_KEY : 
+                !movementKeys.includes(UP_KEY) && upPushed();
+                break;
+            case LEFT_KEY : 
+                !movementKeys.includes(LEFT_KEY) && leftPushed();
+                break;
+            case RIGHT_KEY :
+                !movementKeys.includes(RIGHT_KEY) && rightPushed();
+                break;
+            case ENTER_KEY :
+                enterPushed();
+                break;
         }
     });
 }
@@ -212,28 +237,6 @@ function addUIElements() {
     // gives preview window on hover
     document.getElementById("bodyContent").getElementsByTagName("p")[1].append(info_div);
 }
-
-document.addEventListener('keydown', function (e) {
-    if ([DOWN_KEY, UP_KEY, LEFT_KEY, RIGHT_KEY, ENTER_KEY].includes(e.code) || (e.code == "KeyF" && e.ctrlKey))
-        e.preventDefault();
-    switch (e.code) {
-        case DOWN_KEY : 
-            !movementKeys.includes(DOWN_KEY) && downPushed();
-            break;
-        case UP_KEY : 
-            !movementKeys.includes(UP_KEY) && upPushed();
-            break;
-        case LEFT_KEY : 
-            !movementKeys.includes(LEFT_KEY) && leftPushed();
-            break;
-        case RIGHT_KEY :
-            !movementKeys.includes(RIGHT_KEY) && rightPushed();
-            break;
-        case ENTER_KEY :
-            enterPushed();
-            break;
-    }
-});
 
 function downPushed() {
     movementKeys.push(DOWN_KEY);
