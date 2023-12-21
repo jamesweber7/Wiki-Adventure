@@ -61,21 +61,32 @@ function makeDoors() {
     let maxNumOfLinks = 5000;
     links.length > maxNumOfLinks && links.splice(maxNumOfLinks);
     for (let i = 0; i < links.length; i++) {
-        const door = newDoor();
-        if (links[i].parentElement.tagName == 'P') {
-            door.style.zIndex = -1;
-            door.style.transform = "translate(-36px, -10px)";
-        }
-        links[i].append(door);
+        links[i].append(newDoor(links[i]));
     }
 }
 
-function newDoor() {
+function newDoor(link) {
     let door = document.createElement('img');
     door.className = 'door';
     door.src = 'data:image/png;base64,' + DOOR_DATA;
-    door.style = 'position: absolute; transform: translateY(-10px);';
+    door.style = 'position: absolute; transform: translateY(-10px); opacity: 0.9;';
+    if (hasStandardParent(link)) {
+        door.style.zIndex = -1;
+        door.style.transform = "translate(-36px, -10px)";
+    } else {
+        door.style.opacity = 0.7;
+    }
     return door;
+
+    function hasStandardParent(link) {
+        if (!link.parentElement)
+            return false;
+        if (link.parentElement.tagName == 'P')
+            return true;
+        if (link.parentElement.parentElement && link.parentElement.tagName == 'I' && link.parentElement.parentElement && link.parentElement.parentElement.tagName == 'P')
+            return true;
+        return false;
+    }
 }
 
 function enterDoor() {
@@ -175,7 +186,7 @@ function addEndGameElement() {
 function addUIElements() {
     const info_div = document.createElement('info');
     info_div.id = 'info';
-    info_div.style = "position: fixed; right: 50px; top: 50px; width: 100px; min-height: 100px; border: 2px solid black; background-color: white; color: black; font-family: fangsong; z-index: 1000000; padding: 5px;"
+    info_div.style = "position: fixed; right: 50px; top: 68px; width: 100px; min-height: 100px; border: 2px solid black; background-color: white; color: black; font-family: fangsong; z-index: 1000000; padding: 5px;"
 
     const goal_text = document.createElement('p');
     goal_text.innerText = 'Goal: ';
@@ -183,8 +194,12 @@ function addUIElements() {
     goal_a.style = "font-family: sans-serif;";
     const goal = adventure.end;
     goal_a.innerText = goal;
+    goal_a.title = goal;
     goal_a.href = getWikiUrl(goal);
-    const goal_img = newDoor();
+    const goal_img = newDoor(goal_a);
+    goal_img.style.zIndex = -1;
+    goal_img.style.transform = "translate(-36px, -10px)";
+    goal_img.style.opacity = 0.9;
     goal_img.className = '';    // won't be functional w/ other doors
     goal_a.append(goal_img);
     goal_text.append(goal_a);
@@ -194,7 +209,9 @@ function addUIElements() {
     count_text.innerText = 'Realms Visited: ' + adventure.history.length;
     info_div.append(count_text);
 
-    document.body.append(info_div);
+    // document.body.append(info_div);
+    // document.getElementById("bodyContent").append(info_div);
+    document.getElementById("bodyContent").getElementsByTagName("p")[1].append(info_div);
 }
 
 document.addEventListener('keydown', function (e) {
