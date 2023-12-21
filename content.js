@@ -15,8 +15,8 @@ const DOOR_DATA = 'iVBORw0KGgoAAAANSUhEUgAAACYAAAAoCAYAAACSN4jeAAAAAXNSR0IArs4c6
 var adventure;  // async: get adventure data
 
 const jo = document.createElement('img');
-const movementInterval = 50;
-const movementSpeed = 8;
+const movementInterval = 16;
+const movementSpeed = 4;
 const DOWN_KEY = 'ArrowDown';
 const UP_KEY = 'ArrowUp';
 const LEFT_KEY = 'ArrowLeft';
@@ -69,7 +69,7 @@ function newDoor() {
     let door = document.createElement('img');
     door.className = 'door';
     door.src = 'data:image/png;base64,' + DOOR_DATA;
-    door.style = 'position: absolute; transform: translate(-36px, -10px); z-index: -1;';
+    door.style = 'position: absolute; transform: translate(-36px, -10px);';
     return door;
 }
 
