@@ -61,7 +61,12 @@ function makeDoors() {
     let maxNumOfLinks = 5000;
     links.length > maxNumOfLinks && links.splice(maxNumOfLinks);
     for (let i = 0; i < links.length; i++) {
-        links[i].append(newDoor());
+        const door = newDoor();
+        if (links[i].parentElement.tagName == 'P') {
+            door.style.zIndex = -1;
+            door.style.transform = "translate(-36px, -10px)";
+        }
+        links[i].append(door);
     }
 }
 
@@ -69,7 +74,7 @@ function newDoor() {
     let door = document.createElement('img');
     door.className = 'door';
     door.src = 'data:image/png;base64,' + DOOR_DATA;
-    door.style = 'position: absolute; transform: translate(-36px, -10px);';
+    door.style = 'position: absolute; transform: translateY(-10px);';
     return door;
 }
 
