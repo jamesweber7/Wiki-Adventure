@@ -1,0 +1,9 @@
+style element for walking keyframes
+each movement action (arrow/wasd keypress, mouse click) resets jo walking animation time, walking keyframes
+SIDE QUESTS !
+- npcs etc. can give hints, side quests, etc.
+Career mission on top of other stuff?
+Tools, etc... (flashlight, compass, map)
+Illuminate whole sentence or line when on top of it? That way you don't need to walk across entire lines
+Fullscreen option
+Make a wikipedia page FOR Wiki Adventure, which can act as a home base (maybe has stuff that extension can use to expand on)

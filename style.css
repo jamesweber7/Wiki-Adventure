@@ -1,0 +1,46 @@
+body {
+    width:250px;
+    background-color: blanchedalmond;
+}
+
+section {
+    display: block;
+}
+
+#title-block {
+    text-align: center;
+    font-size: 25px;
+    font-family: fangsong;
+    padding-bottom: 4px;
+    border-bottom: dotted 1px black;
+}
+
+#primary-buttons button {
+    outline: none;
+    border: none;
+    background-color: #fff;
+    border-radius: 10px;
+    width: -webkit-fill-available;
+    aspect-ratio: 2 / 0.5;
+    display: block;
+    cursor: pointer;
+    font-size: 20px;
+    color: black;
+    font-family: fangsong;
+    margin: 8px 0;
+}
+
+#primary-buttons button:hover {
+    background-color: #f8f8f8;
+}
+
+#primary-buttons button:active {
+    background-color: #fbfbfb;
+}
+
+#primary-buttons button:disabled {
+    background-color: #ddd;
+    border: dashed black 2px;
+    color: #555;
+    cursor: default;
+}
