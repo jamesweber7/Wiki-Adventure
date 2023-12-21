@@ -194,7 +194,7 @@ function addUIElements() {
     goal_a.style = "font-family: sans-serif;";
     const goal = adventure.end;
     goal_a.innerText = goal;
-    goal_a.title = goal;
+    goal_a.title = goal;    // need for wikipedia's preview menu on hover
     goal_a.href = getWikiUrl(goal);
     const goal_img = newDoor(goal_a);
     goal_img.style.zIndex = -1;
@@ -209,8 +209,7 @@ function addUIElements() {
     count_text.innerText = 'Realms Visited: ' + adventure.history.length;
     info_div.append(count_text);
 
-    // document.body.append(info_div);
-    // document.getElementById("bodyContent").append(info_div);
+    // gives preview window on hover
     document.getElementById("bodyContent").getElementsByTagName("p")[1].append(info_div);
 }
 
