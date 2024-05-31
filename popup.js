@@ -1,8 +1,11 @@
 setup();
-setDefaultData();
 
 function setup() {
     assignUIFunctionality();
+    getData((data) => {
+        if (!dataExists(data))
+            setDefaultData();
+    })
 }
 
 function assignUIFunctionality() {
@@ -24,30 +27,28 @@ function setData(data) {
 
 function setDefaultData() {
     let data = {
-        adventures: [
-            /*
-                {
-                    name: string,
-                    id: uid,
-                    start: string,
-                    goal: string,
-                    history: [
-                        // url: string
-                    ]
-                }
-                */
-        ]
+        wikidata: {
+            adventures: [
+                /*
+                    {
+                        name: string,
+                        id: uid,
+                        start: string,
+                        goal: string,
+                        history: [
+                            // url: string
+                        ]
+                    }
+                    */
+            ]
+        }
     }
     setData(data);
 }
 
-getData(function(data) {
-    if (dataExists(data)) {
-        console.log(data);
-    } else {
-        setDefaultData();
-    }
-});
+function clearData() {
+    chrome.storage.local.clear();
+}
 
 function dataExists(data) {
     return !!Object.keys(data).length;
