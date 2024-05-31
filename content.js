@@ -485,31 +485,41 @@ function getAdventureData(callback) {
     })
 }
 
-function dataExists(data) {
-    return !!Object.keys(data).length;
+function getData(callback) {
+    chrome.storage.local.get(['wikidata'], (data) => {callback(data);});
+}
+
+function setData(data) {
+    chrome.storage.local.set(data);
 }
 
 function setDefaultData() {
     let data = {
-        adventures: [
-            /*
-                {
-                    name: string,
-                    id: uid,
-                    start: string,
-                    goal: string,
-                    history: [
-                        // url: string
-                    ]
-                }
-            */
-        ]
+        wikidata: {
+            adventures: [
+                /*
+                    {
+                        name: string,
+                        id: uid,
+                        start: string,
+                        goal: string,
+                        history: [
+                            // url: string
+                        ]
+                    }
+                    */
+            ]
+        }
     }
     setData(data);
 }
 
-function getData(callback) {
-    chrome.storage.local.get(['wikidata'], (data) => {callback(data);});
+function clearData() {
+    chrome.storage.local.clear();
+}
+
+function dataExists(data) {
+    return !!Object.keys(data).length;
 }
 
 function saveAdventure(callback) {
