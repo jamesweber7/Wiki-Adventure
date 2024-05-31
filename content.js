@@ -28,6 +28,12 @@ setup();
 
 function setup() {
     getAdventureData((data) => {
+        // There is currently no reason data should be set in content, but good to have the check just in case
+        if (!dataExists(data)) {
+            setDefaultData();
+            setup();
+            return;
+        }
         adventure = data;
         if (window.location.href == adventure.history[adventure.history.length-1]) {
             createJo();
